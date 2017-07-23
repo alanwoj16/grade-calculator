@@ -1,6 +1,6 @@
 <template>
   <div class = "gradeCalcPage">
-    hi
+    gpa
   </div>
 </template>
 
@@ -8,7 +8,9 @@
 export default {
   name: 'hello',
   data () {
-    
+    return {
+      
+    }
   }
 }
 </script>
