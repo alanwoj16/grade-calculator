@@ -2,11 +2,10 @@
   <div id="app">
     <h1 id="title"> Grade Calculator </h1>
     <div class = "buttonNav">
-        <button v-on:click="goToPage('Cummulative')">Cummulative</button>
-        <button v-on:click="goToPage('Weight')">Weight</button>
-        <button v-on:click="goToPage('GPA')">GPA</button>
+        <button class="btn-primary" v-on:click="goToPage('Cummulative')">Cummulative</button>
+        <button class="btn-primary" v-on:click="goToPage('Weight')">Weight</button>
+        <button class="btn-primary" v-on:click="goToPage('GPA')">GPA</button>
     </div>
-    <!-- <img src="./assets/logo.png"> -->
     <router-view></router-view>
   </div>
 </template>

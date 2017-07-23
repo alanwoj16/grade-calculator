@@ -1,6 +1,10 @@
 <template>
   <div class = "gradeCalcPage">
-    hi
+    <div class ="logos">
+      <img src=".././assets/loyola.png">
+      <br>
+      <img src=".././assets/northwestern.png">
+    </div>
   </div>
 </template>
 
@@ -13,5 +17,9 @@ export default {
 
 <style scoped>
 
+.logos{
+  margin-top:100px;
+  text-align: center;
+}
 
 </style>
