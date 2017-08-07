@@ -4,6 +4,7 @@ import gradeCalc from '@/components/GradeCalcPage'
 import cummulative from '@/components/Cummulative'
 import weight from '@/components/Weight'
 import gpa from '@/components/GPA'
+import vueSlider from 'vue-slider-component'
 
 Vue.use(Router)
 

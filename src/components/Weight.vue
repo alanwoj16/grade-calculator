@@ -6,8 +6,8 @@
 
 <script>
 export default {
-  name: 'hello',
-  data () {
+  name: 'weight',
+  data:function () {
     return {
       
     }

@@ -6,8 +6,8 @@
 
 <script>
 export default {
-  name: 'hello',
-  data () {
+  name: 'gpa',
+  data:function () {
     return {
       
     }
