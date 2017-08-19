@@ -17,8 +17,14 @@
 	    <button class="btn-primary" v-on:click="resetValues">Reset</button>
   	  </div>
   	</div>
-  	<div class="gradeSlide">
+  	<div class="predGrade">
   	  <h2 class="predHeader">Predicted Grade</h2>
+  	  <div class = gradesToGo>
+  	    <div class="grade" v-for="grade in predicts">
+  	      <input class="input" type="text" v-model="predicts.pointsPredict">
+  	    </div>
+  	  </div>
+  	  <br><br><br>
   	  <p>Enter/Slide Desired Grade:</p>
   	  <input class="input" type="text" v-model=value>
   	  <br><br><br>
@@ -27,7 +33,7 @@
   	  :max= 100
   	  :width=500>
   	  </vue-slider>
-  	  <button class="btn-primary">Predicted Grade</button>
+  	  <button class="btn-primary">Predict Grade</button>
   	</div>
   	<br>
   	<div class="output">
@@ -43,6 +49,7 @@ export default {
   data:function () {
     return {
     	grades:[{"pointsEarned": "", "pointsTotal" :""}],
+    	predicts:[{"pointsPredict": ""}],
     	value:0,
     	cummGrade:""
     }
@@ -63,6 +70,9 @@ export default {
   	initGrades:function(){
   	  for(var i = 0; i < 10; i++){
   	    this.grades.push({"pointsEarned": "", "pointsTotal" :""})
+  	  }
+  	  for(var j = 0; j < 5; j++){
+  	  	this.predicts.push({"pointsPredict": ""})
   	  }
   	},
 
@@ -97,9 +107,8 @@ export default {
 <style scoped>
 
 
-.gradeSlide{
+.predGrade{
 	display:inline-block;
-	margin-top:150px;
     margin-left:100px;
 }
 
