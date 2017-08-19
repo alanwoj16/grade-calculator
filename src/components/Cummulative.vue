@@ -62,18 +62,9 @@ export default {
   	  var earned = 0
   	  var total = 0
   	  for(var g in this.grades){
-  	  	  if(this.grades[g].length){
-  	  	  	console.log('here')
-  	  	  	console.log(this.grades[g].pointsEarned)
-  	  	  	console.log(this.grades[g].pointsTotal)
-  	  	    earned += this.grades[g].pointsEarned
-  	  	  	total += this.grades[g].pointsTotal
-  	  	  	console.log(earned)
-  	  	  	console.log(total)
-  	  	  }
+  	    earned += Number(this.grades[g].pointsEarned)
+  	  	total += Number(this.grades[g].pointsTotal)
   	  }
-  	  console.log(earned)
-  	  console.log(total)
   	  this.cummGrade = 100*(earned / total).toFixed(2)	
   	}
   },
