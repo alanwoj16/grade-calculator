@@ -10,17 +10,20 @@
   	  </div>
   	  <br>
   	  <div class="buttons">
-	    <button class="btn-primary" v-on:click="test">Submit</button>
+	    <button class="btn-primary" v-on:click="calculateGrade">Submit</button>
 	    <button class="btn-primary" v-on:click="addGrade">+</button>
 	    <button class="btn-primary" v-on:click="removeGrade">-</button>
   	  </div>
   	</div>
-  	<div class="gradeSlide">
+  	<!-- <div class="gradeSlide">
   	  <vue-slider  ref="slider" v-model="value"
   	  :min = 0
   	  :max= 100
   	  :width=500>
   	  </vue-slider>
+  	</div> -->
+  	<div class="output">
+  	  <p v-if="cummGrade"> Your grade is {{cummGrade}}%</p>
   	</div>
   </div>
 </template>
@@ -32,7 +35,8 @@ export default {
   data:function () {
     return {
     	grades:[{"pointsEarned": "", "pointsTotal" :""}],
-    	value:1
+    	value:1,
+    	cummGrade:""
     }
   },
   created:function(){
@@ -54,11 +58,23 @@ export default {
   	  }
   	},
 
-  	test:function(){
+  	calculateGrade:function(){
+  	  var earned = 0
+  	  var total = 0
   	  for(var g in this.grades){
-  		  console.log(this.grades[g].pointsEarned)
-  		  console.log(this.grades[g].pointsTotal)
-  	  }	
+  	  	  if(this.grades[g].length){
+  	  	  	console.log('here')
+  	  	  	console.log(this.grades[g].pointsEarned)
+  	  	  	console.log(this.grades[g].pointsTotal)
+  	  	    earned += this.grades[g].pointsEarned
+  	  	  	total += this.grades[g].pointsTotal
+  	  	  	console.log(earned)
+  	  	  	console.log(total)
+  	  	  }
+  	  }
+  	  console.log(earned)
+  	  console.log(total)
+  	  this.cummGrade = 100*(earned / total).toFixed(2)	
   	}
   },
   components:{
