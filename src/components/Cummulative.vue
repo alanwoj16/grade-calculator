@@ -11,20 +11,23 @@
   	  </div>
   	  <br>
   	  <div class="buttons">
-	    <button class="btn-primary" v-on:click="calculateGrade">Submit</button>
 	    <button class="btn-primary" v-on:click="addGrade">+</button>
 	    <button class="btn-primary" v-on:click="removeGrade">-</button>
-	    <button class="btn-primary" v-on:click="resetValues">Reset</button>
+	    <button class="btn-primary" v-on:click="resetEntries">Reset</button>
+      <div class="output">
+      <h3> Your grade is {{calculateGrade}}%</h3>
+    </div>
   	  </div>
   	</div>
   	<div class="predGrade">
   	  <h2 class="predHeader">Predicted Grade</h2>
+      <p>Enter remaining point category totals: </p>
   	  <div class = gradesToGo>
   	    <div class="grade" v-for="grade in predicts">
-  	      <input class="input" type="text" v-model="predicts.pointsPredict">
+  	      <input class="input" type="text" v-model="grade.pointsPredict">
   	    </div>
   	  </div>
-  	  <br><br><br>
+  	  <br><br>
   	  <p>Enter/Slide Desired Grade:</p>
   	  <input class="input" type="text" v-model=value>
   	  <br><br><br>
@@ -33,12 +36,13 @@
   	  :max= 100
   	  :width=500>
   	  </vue-slider>
-  	  <button class="btn-primary">Predict Grade</button>
+  	  <button v-on:click="predictGrade" class="btn-primary">Predict Grade</button>
+      <button v-on:click="resetPred" class="btn-primary">Reset</button>
+      <div class="predOutput">
+        <h3 v-if="predictedGrade"> Your grade is {{predictedGrade}}%</h3>
+      </div>
   	</div>
   	<br>
-  	<div class="output">
-  	  <p v-if="cummGrade"> Your grade is {{cummGrade}}%</p>
-  	</div>
   </div>
 </template>
 
@@ -51,7 +55,13 @@ export default {
     	grades:[{"pointsEarned": "", "pointsTotal" :""}],
     	predicts:[{"pointsPredict": ""}],
     	value:0,
-    	cummGrade:""
+      earned:0,
+      total:0,
+    	cummGrade:"",
+      predictedTotal:0,
+      predictedEarned:0,
+      predictedGrade:NaN
+
     }
   },
   created:function(){
@@ -76,28 +86,54 @@ export default {
   	  }
   	},
 
-  	resetValues:function(){
+  	resetEntries:function(){
       for(var g in this.grades){
   	    this.grades[g].pointsEarned =""
         this.grades[g].pointsTotal = ""
   	  }
+      this.cummGrade=""
   	},
 
-  	calculateGrade:function(){
-  	  var earned = 0
-  	  var total = 0
-  	  for(var g in this.grades){
-  	    earned += Number(this.grades[g].pointsEarned)
-  	  	total += Number(this.grades[g].pointsTotal)
-  	  }
-  	  this.cummGrade = 100*(earned / total)
-  	  this.cummGrade=this.cummGrade.toFixed(2)	
-  	},
+    resetPred:function(){
+      for(var p in this.predicts){
+        this.predicts[p].pointsPredict =""
+      }
+      this.predictedGrade=""
+    },
 
   	predictGrade:function(){
-
+      this.predictedEarned = Number(this.earned)
+      this.predictedTotal=Number(this.total)
+      for(var p in this.predicts){
+        this.predictedTotal += Number(this.predicts[p].pointsPredict)
+      }
+      console.log(this.predictedTotal)
+      console.log(this.predictedEarned)
   	}
   },
+  computed:{
+    calculateGrade:function(){
+      var earned = 0
+      var total = 0
+      for(var g in this.grades){
+        earned += Number(this.grades[g].pointsEarned)
+        total += Number(this.grades[g].pointsTotal)
+      }
+      this.earned = earned
+      this.total=total
+      this.cummGrade = 100*(earned / total)
+      this.cummGrade=this.cummGrade.toFixed(2) 
+
+      if(isNaN(this.cummGrade)) {
+        return 0
+      }
+      else if(!isFinite(this.cummGrade)){
+        return 0
+      }
+      return this.cummGrade
+    },
+  },
+
   components:{
   	vueSlider
   }
@@ -109,7 +145,7 @@ export default {
 
 .predGrade{
 	display:inline-block;
-    margin-left:100px;
+  margin-left:400px;
 }
 
 .entries{
@@ -126,6 +162,10 @@ export default {
 	width:50px;
 }
 
+/*.predGrade{
+  position: absolute;
+}
+*/
 
 
 </style>
