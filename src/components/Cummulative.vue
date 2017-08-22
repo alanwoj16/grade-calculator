@@ -99,6 +99,7 @@ export default {
         this.predicts[p].pointsPredict =""
       }
       this.predictedGrade=""
+      this.value=0
     }
   },
 
