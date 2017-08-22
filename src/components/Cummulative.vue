@@ -36,10 +36,10 @@
   	  :max= 100
   	  :width=500>
   	  </vue-slider>
-  	  <button v-on:click="predictGrade" class="btn-primary">Predict Grade</button>
+  	  <!-- <button v-on:click="predictGrade" class="btn-primary">Predict Grade</button> -->
       <button v-on:click="resetPred" class="btn-primary">Reset</button>
       <div class="predOutput">
-        <h3 v-if="predictedGrade"> Your grade is {{predictedGrade}}%</h3>
+        <h3> You need {{predictGrade}} points to get a {{value}}% in the class.</h3>
       </div>
   	</div>
   	<br>
@@ -57,10 +57,10 @@ export default {
     	value:0,
       earned:0,
       total:0,
-    	cummGrade:"",
+    	cummGrade:0,
       predictedTotal:0,
       predictedEarned:0,
-      predictedGrade:NaN
+      predictedGrade:0
 
     }
   },
@@ -99,18 +99,9 @@ export default {
         this.predicts[p].pointsPredict =""
       }
       this.predictedGrade=""
-    },
-
-  	predictGrade:function(){
-      this.predictedEarned = Number(this.earned)
-      this.predictedTotal=Number(this.total)
-      for(var p in this.predicts){
-        this.predictedTotal += Number(this.predicts[p].pointsPredict)
-      }
-      console.log(this.predictedTotal)
-      console.log(this.predictedEarned)
-  	}
+    }
   },
+
   computed:{
     calculateGrade:function(){
       var earned = 0
@@ -132,6 +123,23 @@ export default {
       }
       return this.cummGrade
     },
+
+    predictGrade:function(){
+      this.predictedEarned = Number(this.earned)
+      this.predictedTotal=Number(this.total)
+      for(var p in this.predicts){
+        this.predictedTotal += Number(this.predicts[p].pointsPredict)
+      }
+
+      var need = 0 
+      var val = this.value / 100.0
+      need = Math.ceil(val * this.predictedTotal - this.earned)
+      this.predictedGrade = need
+      if(need<0){
+        return 0
+      }
+      return need
+    }
   },
 
   components:{
@@ -145,12 +153,16 @@ export default {
 
 .predGrade{
 	display:inline-block;
-  margin-left:400px;
+  float:right;
+  margin-right:600px;
+  
 }
 
 .entries{
 	display: inline-block;
-	float:left
+	float:left;
+  margin-left:50px;
+  
 }
 
 .gradeCalcPage{
