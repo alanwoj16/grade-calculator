@@ -59,7 +59,7 @@ export default {
       final:[{"finalTotal": "","finalWeight": ""}],
       value:0,
       weightSum:0,
-      weightTotal:0,
+      earnedTotal:0,
       weightGrade:0
 
     }
@@ -105,28 +105,25 @@ export default {
   computed:{
     calculateGrade:function(){
 
-      var weightTotal = 0
+      var earnedTotal = 0
       var weightSum = 0
       for(var g in this.grades){
       	if(this.grades[g].pointsEarned === "" || this.grades[g].pointsTotal === "" || this.grades[g].weight === ""){
       	  continue
       	}
       	else{
-      		console.log('here')
       	  var earned = Number(this.grades[g].pointsEarned) 
       	  var total = Number(this.grades[g].pointsTotal)
       	  var weight = Number(this.grades[g].weight) 
 
-      	  weightTotal += parseFloat(earned / total) * weight
+      	  earnedTotal += parseFloat(earned / total) * weight
           weightSum+=weight
         }
       }
 
       this.weightSum=weightSum
-      this.weightTotal=weightTotal
-      console.log(this.weightSum)
-      console.log(this.weightTotal)
-      var weightGrade = weightTotal / weightSum * 100
+      this.earnedTotal=earnedTotal.toFixed(2)
+      var weightGrade = earnedTotal / weightSum * 100
       this.weightGrade = weightGrade.toFixed(2)
 
       if(isNaN(this.weightGrade)) {
@@ -141,14 +138,12 @@ export default {
     predictGrade:function(){
 
       var need = 0
+      var totalSum = Number(this.weightSum) + Number(this.final.finalWeight)
+      var parsedWeight = this.value/100.0
 
-      need = Math.ceil((this.value*(this.weightSum+this.final.finalWeight)-this.weightTotal)/this.final.finalWeight)
-     
-
-      // var need = 0 
-      // var val = this.value / 100.0
-      // need = Math.ceil(val * this.predictedTotal - this.earned)
+      need = Math.ceil(((parsedWeight*totalSum)-Number(this.earnedTotal))/Number(this.final.finalWeight)*Number(this.final.finalTotal))
       this.predictedGrade = need
+
       if(need<0){
         return 0
       }else{
