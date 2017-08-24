@@ -19,6 +19,25 @@
     </div>
   	  </div>
   	</div>
+    <div class="gpaDisplay">
+      <table class="gpaTable">
+        <thead><tr class="gpaHeader"><th>Letter</th><th>GPA</th></tr></thead>
+        <tbody>
+          <tr><th>A</th><th>4.00</th></tr>
+          <tr><th>A-</th><th>3.67</th></tr>
+          <tr><th>B+</th><th>3.33</th></tr>
+          <tr><th>B</th><th>3.00</th></tr>
+          <tr><th>B-</th><th>2.67</th></tr>
+          <tr><th>C+</th><th>2.33</th></tr>
+          <tr><th>C</th><th>2.00</th></tr>
+          <tr><th>C-</th><th>1.67</th></tr>
+          <tr><th>D+</th><th>1.33</th></tr>
+          <tr><th>D</th><th>1.00</th></tr>
+          <tr><th>D-</th><th>0.67</th></tr>
+          <tr><th>F</th><th>0.00</th></tr>
+        </tbody>
+      </table>
+    </div>
   	<div class="predGrade">
   	  <h2 class="predHeader">Predicted Grade</h2>
   	  <br>
@@ -39,10 +58,12 @@
   	  :width=500>
   	  </vue-slider>
       <button v-on:click="resetPred" class="btn-primary">Reset</button>
-      <div class="predOutput">
-        <h3> You need an average GPA of {{predictGrade}} to get a {{value}}</h3>
-      </div>
   	</div>
+  	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+  	<div class="predOutput">
+      <h3> You need an average GPA of {{predictGrade}} to get a {{value}}</h3>
+    </div>
+    <br>
   	<br>
   </div>
 </template>
@@ -55,10 +76,11 @@ export default {
     return {
       grades:[{"letter": "", "creditHours" :""}],
       final:[{"creditHours": ""}],
-      value:3.00,
+      value:3.01,
       gpaGrade:0,
       totalCreditHours:0,
-      earnedGPAPoints:0
+      earnedGPAPoints:0,
+      predictedGPA:0
 
     }
   },
@@ -79,7 +101,8 @@ export default {
   	  for(var i = 0; i < 10; i++){
   	    this.grades.push({"letter": "", "creditHours" :""})
   	  }
-  	  this.value = value.toFixed(2)
+  	  var val = 0 
+  	  this.value = val.toFixed(2)
   	},
 
   	resetEntries:function(){
@@ -140,11 +163,10 @@ export default {
 
   computed:{
     calculateGrade:function(){
-    	console.log('here')
-      
+     
       var totalCreditHours = 0
       var earnedGPAPoints = 0
-      console.log(this.grades)
+
       for(var g in this.grades){
       	if(this.grades[g].letter === "" || this.grades[g].creditHours === ""){
       	  continue
@@ -175,20 +197,12 @@ export default {
     predictGrade:function(){
 
       var need = 0
-
       var allCreditHours = this.totalCreditHours+Number(this.final.creditHours)
 
       need = ((allCreditHours*this.value)-this.earnedGPAPoints)/this.final.creditHours
-
-      console.log(need)
-
       need = need.toFixed(3)
-
-      // var totalSum = Number(this.weightSum) + Number(this.final.finalWeight)
-      // var parsedWeight = this.value/100.0
-
-      // need = Math.ceil(((parsedWeight*totalSum)-Number(this.earnedTotal))/Number(this.final.finalWeight)*Number(this.final.finalTotal))
-      // this.predictedGrade = need
+      
+      this.predictedGPA=need
 
       if(need<0){
         return 0
@@ -198,10 +212,6 @@ export default {
       	}
       }
       return need
-    },
-
-    valueToFixed:function(){
-
     }
   },
 
@@ -215,15 +225,15 @@ export default {
 
 
 .predGrade{
-	display:inline-block;
+  display:inline-block;
   float:right;
-  margin-right:600px;
+  margin-right:20%;
   
 }
 
 .entries{
-	display: inline-block;
-	float:left;
+  display: inline-block;
+  float:left;
   margin-left:50px;
   
 }
@@ -237,10 +247,41 @@ export default {
 	width:50px;
 }
 
-/*.predGrade{
-  position: absolute;
+.predOutput{
+  display:inline-block;
+  float:left;
+  margin-left:300px;
 }
-*/
+
+.gpaDisplay{
+  display:inline-block;
+  float:right;
+  margin-right:20%;
+}
+
+.gpaTable{
+  font-size:150%;
+
+}
 
 
+th{
+  text-align: center
+}
+
+tr, th {
+  border: 2.5px solid black; 
+  border-collapse: collapse;
+} 
+tbody tr:nth-child(even){
+    background-color: #ADD8E6;
+}
+tbody tr:nth-child(odd){
+    background-color: #DEF3F9;
+}
+
+thead{
+  background-color: #2c6372;
+  color: white;
+}
 </style>

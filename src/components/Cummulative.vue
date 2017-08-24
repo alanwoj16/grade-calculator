@@ -36,7 +36,6 @@
   	  :max= 100
   	  :width=500>
   	  </vue-slider>
-  	  <!-- <button v-on:click="predictGrade" class="btn-primary">Predict Grade</button> -->
       <button v-on:click="resetPred" class="btn-primary">Reset</button>
       <div class="predOutput">
         <h3> You need {{predictGrade}} points to get a {{value}}% in the class.</h3>
@@ -155,7 +154,7 @@ export default {
 .predGrade{
 	display:inline-block;
   float:right;
-  margin-right:600px;
+  margin-right:40%;
   
 }
 
@@ -174,11 +173,5 @@ export default {
 .input{
 	width:50px;
 }
-
-/*.predGrade{
-  position: absolute;
-}
-*/
-
 
 </style>

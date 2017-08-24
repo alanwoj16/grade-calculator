@@ -167,7 +167,7 @@ export default {
 .predGrade{
 	display:inline-block;
   float:right;
-  margin-right:600px;
+  margin-right:40%;
   
 }
 
@@ -186,11 +186,6 @@ export default {
 .input{
 	width:50px;
 }
-
-/*.predGrade{
-  position: absolute;
-}
-*/
 
 
 </style>
