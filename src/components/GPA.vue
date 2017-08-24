@@ -206,10 +206,12 @@ export default {
 
       if(need<0){
         return 0
-      }else{
-      	if(!isFinite(need)){
-      		return 0
-      	}
+      }
+      else if(!isFinite(need)){
+      	return 0  
+      }
+      else if (need>4.0){
+        return ">4.000"
       }
       return need
     }
