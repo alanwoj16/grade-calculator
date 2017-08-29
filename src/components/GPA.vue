@@ -41,6 +41,12 @@
   	<div class="predGrade">
   	  <h2 class="predHeader">Predicted Grade</h2>
   	  <br>
+      <h4>Enter Cummulative GPA:</h4>
+      <div class = "cummulative">
+        <p>&nbsp;&nbsp;GPA &emsp;&emsp;&emsp;&nbsp;Credit Hours</p>
+        <input class="input" type="text" v-model="cummulative.gpa">&emsp;&emsp;&emsp;
+        <input class="input" type="text" v-model="cummulative.creditHours">
+      </div>
       <h4>Enter remaining credit hours: </h4>
   	  <div class = gradesToGo>
   	    <div class="grade">
@@ -80,7 +86,8 @@ export default {
       gpaGrade:0,
       totalCreditHours:0,
       earnedGPAPoints:0,
-      predictedGPA:0
+      predictedGPA:0,
+      cummulative:[{"gpa":"","creditHours":""}]
 
     }
   },
@@ -115,9 +122,10 @@ export default {
 
     resetPred:function(){
 
-      this.final.creditHours =""
-      
+      this.final.creditHours =""   
       this.predictedGrade=""
+      this.cummulative.gpa=""
+      this.cummulative.creditHours=""
       this.value=3.0
     },
 
