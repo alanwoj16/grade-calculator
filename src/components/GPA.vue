@@ -205,9 +205,11 @@ export default {
     predictGrade:function(){
 
       var need = 0
-      var allCreditHours = this.totalCreditHours+Number(this.final.creditHours)
+      var allCreditHours = this.totalCreditHours+Number(this.final.creditHours) + Number(this.cummulative.creditHours)
 
-      need = ((allCreditHours*this.value)-this.earnedGPAPoints)/this.final.creditHours
+
+
+      need = ((allCreditHours*this.value)-(this.earnedGPAPoints+this.cummulative.creditHours*this.cummulative.gpa))/this.final.creditHours
       need = need.toFixed(3)
       
       this.predictedGPA=need
