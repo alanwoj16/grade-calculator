@@ -50,6 +50,12 @@
   	<div class="predGrade">
   	  <h2 class="predHeader"><u>Predicted Grade</u></h2>
   	  <br>
+      <h4>Enter Cummulative GPA:</h4>
+      <div class = "cummulative">
+        <p>&nbsp;&nbsp;GPA &emsp;&emsp;&emsp;&nbsp;Credit Hours</p>
+        <input class="input" type="text" v-model="cummulative.gpa">&emsp;&emsp;&emsp;
+        <input class="input" type="text" v-model="cummulative.creditHours">
+      </div>
       <h4>Enter remaining credit hours: </h4>
   	  <div class = gradesToGo>
   	    <div class="grade">
@@ -91,8 +97,12 @@ export default {
       totalCreditHours:0,
       earnedGPAPoints:0,
       predictedGPA:0,
+<<<<<<< HEAD
       prevGPA:0,
       prevCreditHours:0
+=======
+      cummulative:[{"gpa":"","creditHours":""}]
+>>>>>>> b69a63668436e33732d3870d5fd143eeb8d86bda
 
     }
   },
@@ -127,9 +137,10 @@ export default {
 
     resetPred:function(){
 
-      this.final.creditHours =""
-      
+      this.final.creditHours =""   
       this.predictedGrade=""
+      this.cummulative.gpa=""
+      this.cummulative.creditHours=""
       this.value=3.0
     },
 
@@ -216,9 +227,11 @@ export default {
     predictGrade:function(){
 
       var need = 0
-      var allCreditHours = this.totalCreditHours+Number(this.final.creditHours)
+      var allCreditHours = this.totalCreditHours+Number(this.final.creditHours) + Number(this.cummulative.creditHours)
 
-      need = ((allCreditHours*this.value)-this.earnedGPAPoints)/this.final.creditHours
+
+
+      need = ((allCreditHours*this.value)-(this.earnedGPAPoints+this.cummulative.creditHours*this.cummulative.gpa))/this.final.creditHours
       need = need.toFixed(3)
       
       this.predictedGPA=need
