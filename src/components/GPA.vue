@@ -97,12 +97,10 @@ export default {
       totalCreditHours:0,
       earnedGPAPoints:0,
       predictedGPA:0,
-<<<<<<< HEAD
       prevGPA:0,
-      prevCreditHours:0
-=======
+      prevCreditHours:0,
       cummulative:[{"gpa":"","creditHours":""}]
->>>>>>> b69a63668436e33732d3870d5fd143eeb8d86bda
+
 
     }
   },
