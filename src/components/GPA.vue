@@ -1,7 +1,16 @@
 <template>
   <div class = "gradeCalcPage">
     <div class = "entries">
-      <h2>Current Grade</h2>
+      <h2><u>Current Grade</u></h2>
+      <h4 class = "previousResults"> Previous grade information:</h4>
+  	  <div class = "existingGrades">
+  	    <p>GPA: 
+  	      <input class="input" type="text" v-model="prevGPA">
+  	      &nbsp; Credit Hours: 
+  	      <input class="input" type="text" v-model="prevCreditHours">
+  	    </p>
+  	  </div>
+  	  <br>
       <p class="header"> &emsp;Letter &emsp;&emsp;&emsp;Credit Hours</p>
   	  <div class ="gpaGrades">
   	    <div class="grade" v-for="grade in grades">
@@ -39,7 +48,7 @@
       </table>
     </div>
   	<div class="predGrade">
-  	  <h2 class="predHeader">Predicted Grade</h2>
+  	  <h2 class="predHeader"><u>Predicted Grade</u></h2>
   	  <br>
       <h4>Enter remaining credit hours: </h4>
   	  <div class = gradesToGo>
@@ -59,7 +68,7 @@
   	  </vue-slider>
       <button v-on:click="resetPred" class="btn-primary">Reset</button>
   	</div>
-  	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+  	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
   	<div class="predOutput">
       <h3> You need an average GPA of {{predictGrade}} to get a {{value}}</h3>
     </div>
@@ -76,11 +85,14 @@ export default {
     return {
       grades:[{"letter": "", "creditHours" :""}],
       final:[{"creditHours": ""}],
+      //prev:[{"gpa": "","creditHours" :""}],
       value:3.01,
       gpaGrade:0,
       totalCreditHours:0,
       earnedGPAPoints:0,
-      predictedGPA:0
+      predictedGPA:0,
+      prevGPA:0,
+      prevCreditHours:0
 
     }
   },
@@ -163,9 +175,14 @@ export default {
 
   computed:{
     calculateGrade:function(){
-     
+
       var totalCreditHours = 0
       var earnedGPAPoints = 0
+
+      if(this.prevGPA != "" && this.prevCreditHours != ""){
+        earnedGPAPoints+=Number(this.prevGPA)*Number(this.prevCreditHours)
+        totalCreditHours+=Number(this.prevCreditHours)
+      }
 
       for(var g in this.grades){
       	if(this.grades[g].letter === "" || this.grades[g].creditHours === ""){
@@ -177,13 +194,15 @@ export default {
         }
       }
 
-      this.totalCreditHours = totalCreditHours
+      this.totalCreditHours=totalCreditHours
       this.earnedGPAPoints=earnedGPAPoints
+      
 
       var gpaGrade = parseFloat(earnedGPAPoints)/totalCreditHours
 
       this.gpaGrade=gpaGrade.toFixed(3)
 
+      console.log(this.gpaGrade)
 
       if(isNaN(this.gpaGrade)) {
         return 0
@@ -229,8 +248,7 @@ export default {
 .predGrade{
   display:inline-block;
   float:right;
-  margin-right:20%;
-  
+  margin-right:12%;
 }
 
 .entries{
@@ -252,7 +270,7 @@ export default {
 .predOutput{
   display:inline-block;
   float:left;
-  margin-left:300px;
+  margin-left:200px;
 }
 
 .gpaDisplay{
