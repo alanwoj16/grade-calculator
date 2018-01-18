@@ -4,9 +4,7 @@
   "description": "An online calculator written in Vue.js",
   "author": "Alan <alanwoj16@gmail.com>",
   "private": true,
-  "homepage": "https://alanwoj16.github.io/grade-calculator/",
   "scripts": {
-    "deploy": "node ./node_modules/vue-gh-pages/index.js",
     "dev": "node build/dev-server.js",
     "start": "node build/dev-server.js",
     "build": "node build/build.js"
