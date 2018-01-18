@@ -3,7 +3,7 @@
     <div class ="logos">
       <img src="/grade-calculator/static/loyola.png">
       <br>
-      <img src="grade-calculator/static/northwestern.png">
+      <img src="/grade-calculator/static/northwestern.png">
     </div>
   </div>
 </template>
