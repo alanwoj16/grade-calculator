@@ -217,8 +217,6 @@ export default {
       var need = 0
       var allCreditHours = this.totalCreditHours+Number(this.final.creditHours)
 
-
-
       need = ((allCreditHours*this.value)-(this.earnedGPAPoints))/this.final.creditHours
       need = need.toFixed(3)
       
@@ -284,7 +282,6 @@ export default {
   font-size:150%;
 
 }
-
 
 th{
   text-align: center
