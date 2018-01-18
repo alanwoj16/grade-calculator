@@ -1,7 +1,7 @@
 <template>
   <div class = "gradeCalcPage">
     <div class = "entries">
-      <h2>Current Grade</h2>
+      <h2><u>Current Grade</u></h2>
       <p class="header"> &emsp;Earned &emsp;&emsp;&emsp;Total&emsp;&emsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Weight</p>
   	  <div class ="weightGrades">
   	    <div class="grade" v-for="grade in grades">
@@ -21,7 +21,7 @@
   	  </div>
   	</div>
   	<div class="predGrade">
-  	  <h2 class="predHeader">Predicted Grade</h2>
+  	  <h2 class="predHeader"><u>Predicted Grade</u></h2>
   	  <br>
       <h4>Enter final grade info: </h4>
   	  <div class = gradesToGo>

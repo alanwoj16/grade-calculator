@@ -1,7 +1,7 @@
 <template>
   <div class = "gradeCalcPage">
     <div class = "entries">
-      <h2>Current Grade</h2>
+      <h2><u>Current Grade</u></h2>
       <p class="header"> &emsp;Earned &emsp;&emsp;&emsp;Total</p>
   	  <div class ="cummGrades">
   	    <div class="grade" v-for="grade in grades">
@@ -20,7 +20,7 @@
   	  </div>
   	</div>
   	<div class="predGrade">
-  	  <h2 class="predHeader">Predicted Grade</h2>
+  	  <h2 class="predHeader"><u>Predicted Grade</u></h2>
       <p>Enter remaining point category totals: </p>
   	  <div class = gradesToGo>
   	    <div class="grade" v-for="grade in predicts">
