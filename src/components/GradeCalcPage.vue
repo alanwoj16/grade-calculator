@@ -1,9 +1,9 @@
 <template>
   <div class = "gradeCalcPage">
     <div class ="logos">
-      <img src=".././assets/loyola.png">
+      <img src="/static/loyola.png">
       <br>
-      <img src=".././assets/northwestern.png">
+      <img src="/static/northwestern.png">
     </div>
   </div>
 </template>
